@@ -6,13 +6,15 @@ import sys
 
 TAB_SIZE = 4
 
+allcontent, content_tab2space = [], []
 filenames = sys.argv[1:]
 for filename in filenames:
-    if filename.endswith('py'):
-        with open(filename, 'r', encoding='utf-8') as f:
-            allcontent = f.read()
+    with open(filename, 'r', encoding='utf-8') as f:
+        # print(help(f))
+        allcontent = f.readlines()
 
-        allcontent = allcontent.replace('\t', ' '*TAB_SIZE)
+for item in allcontent:
+    content_tab2space.append(item.replace('\t', ' '*TAB_SIZE))
 
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(allcontent)
+with open('tab2space_'+filename, 'w', encoding='utf-8') as f:
+    f.writelines(content_tab2space)
